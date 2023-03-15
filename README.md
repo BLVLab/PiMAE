@@ -16,7 +16,7 @@ Pytorch pretraining & downstream-training code for <strong>PiMAE</strong>. We pr
 > 📣 check out another lattest work from us, [I2P-MAE](https://github.com/ZrrSkywalker/I2P-MAE), which obtains superior 3D representations from 2D pre-trained models via Image-to-Point Masked Autoencoders. 📣 
 
 ## Model Zoo
-We provide our pretrained weights (on SUNRGBD) and finetuned baseline models (on SUNRGBD, ScanNetV2, KITTI), including 3DETR, DETR, MonoDETR, GroupFree-3D. 
+We provide our pretrained weights (on SUNRGBD) and finetuned transformer-based baseline models (on SUNRGBD, ScanNetV2, KITTI), including 3DETR, DETR, MonoDETR.
 
 <table>
   <thead>
@@ -165,29 +165,19 @@ cd Downstream/detr/d2
 python train_net.py --config configs/detr_256_6_6_torchvision.yaml --num-gpus 8
 ```
 
-
 ### Acknowledgement
 
-This repository is based on [3DETR](https://github.com/facebookresearch/3detr), [MonoDETR](https://github.com/ZrrSkywalker/MonoDETR), [DETR](https://github.com/facebookresearch/detr), [timm](https://github.com/rwightman/pytorch-image-models/tree/master/timm), [MAE](https://github.com/facebookresearch/mae) repositories.
-
-
-### License
-
-This project is under the MIT license. See [LICENSE](LICENSE) for details.
+This repository is based on [3DETR](https://github.com/facebookresearch/3detr), [MonoDETR](https://github.com/ZrrSkywalker/MonoDETR), [DETR](https://github.com/facebookresearch/detr), [timm](https://github.com/rwightman/pytorch-image-models/tree/master/timm), [MAE](https://github.com/facebookresearch/mae) repositories, we thank them for their great work.
 
 ### Citation
 
 If you find this repository helpful, please consider citing our work:
 
 ```
-@misc{chen2023pimae,
-  doi = {10.48550/ARXIV.2303.08129},
-  url = {https://arxiv.org/abs/2303.08129}, 
+@inproceedings{chen2023pimae，
+  title={PiMAE: Point Cloud and Image Interactive Masked Autoencoders for 3D Object Detection},
   author = {Chen, Anthony and Zhang, Kevin and Zhang, Renrui and Wang, Zihan and Lu, Yuheng and Guo, Yandong and Zhang, Shanghang},
-  keywords = {Computer Vision and Pattern Recognition (cs.CV), Artificial Intelligence (cs.AI), FOS: Computer and information sciences, FOS: Computer and information sciences}, 
-  title = {PiMAE: Point Cloud and Image Interactive Masked Autoencoders for 3D Object Detection},
-  publisher = {arXiv},
-  year = {2023}, 
-  copyright = {arXiv.org perpetual, non-exclusive license}
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2023}
 }
 ```
