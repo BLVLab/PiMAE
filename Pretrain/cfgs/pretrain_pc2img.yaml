@@ -1,0 +1,101 @@
+optimizer : {
+  type: AdamW,
+  kwargs: {
+  lr : 0.001,
+  weight_decay : 0.05
+}}
+
+scheduler: {
+  type: CosLR,
+  kwargs: {
+    epochs: 400,
+    initial_epochs : 15
+}}
+
+dataset : {
+  train : { _base_: cfgs/dataset_configs/ShapeNet-55.yaml,
+            others: {subset: 'train', npoints: 1024}},
+  val : { _base_: cfgs/dataset_configs/ShapeNet-55.yaml,
+            others: {subset: 'test', npoints: 1024}},
+  test : { _base_: cfgs/dataset_configs/ShapeNet-55.yaml,
+            others: {subset: 'test', npoints: 1024}}}
+
+img_model: {
+  NAME: MAE,
+  patch_size: 16,
+  encoder: {
+    trans_dim: 256,
+    depth: 3,
+    num_heads: 4,
+    mlp_ratio: 4.0,
+  },
+  decoder: {
+    trans_dim: 192,
+    depth: 3,
+    num_heads: 3,
+    mlp_ratio: 4.0,
+  }
+}
+
+pc_model : {
+  NAME: Point_MAE,
+  group_size: 32,
+  num_group: 128,
+  loss: cdl2,
+  transformer_config: {
+    mask_ratio: 0.6,
+    mask_type: 'rand',
+    trans_dim: 256,
+    encoder_dims: 256,
+    depth: 3,
+    drop_path_rate: 0.1,
+    num_heads: 4,
+    # from 3detr
+    dim_feedforward: 128,
+    dropout: 0.1,
+    # decoders
+    decoder_trans_dim: 192,
+    decoder_depth: 3,
+    decoder_num_heads: 3,
+  },
+  }
+
+joint_model : {
+  NAME: MultiMAE,
+  hp_overlap_ratio: 1.0,
+  token_fusion: False,
+  pc2img: {
+    rgb: False,
+    feat: True,
+  },
+  mask_ratio: 0.6,
+  encoder: {
+    trans_dim: 256,
+    depth: 3,
+    num_heads: 4,
+    mlp_ratio: 4.0,
+    # qkv_bias: True,
+    # drop_rate: 0.0,
+    # attn_drop_rate: 0.0,
+    # drop_path_rate: 0.0,
+
+    # from 3detr
+    dim_feedforward: 128,
+    dropout: 0.1,
+  },
+  decoder: {
+    trans_dim: 256, 
+    depth: 0,
+    num_heads: 4,
+    mlp_ratio: 4.0,
+  }
+}
+
+
+npoints: 2048
+total_bs : 128
+step_per_update : 2
+max_epoch : 400
+train_aug: False
+
+description: "3+3 structure with smaller decoder settings and no augmenation, with overlap_ratio 0"

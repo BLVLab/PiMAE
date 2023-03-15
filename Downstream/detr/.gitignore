@@ -1,0 +1,6 @@
+/wandb
+**/__pycache__/**
+/visualization
+/experiments
+/build
+.DS_Store
