@@ -4,6 +4,7 @@ Accepted to CVPR2023. 🔥
 
 [`Paper`](https://arxiv.org/abs/2303.08129) 
 | [`BibTeX`](#citation)
+| [`Webpage`](https://antonioo-c.github.io/projects/pimae.html)
 
 
 Pytorch pretraining & downstream-training code for <strong>PiMAE</strong>. We propose a MAE-based self-supervised pre-training framework that promotes 3D and 2D interaction to improve model performance on downstream object detection tasks.
