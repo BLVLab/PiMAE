@@ -100,7 +100,7 @@ Next, install required dependencies.
 ```
 cd Pretrain
 
-sh intall.sh
+sh install.sh
 ```
 
 ### Data Preparation
